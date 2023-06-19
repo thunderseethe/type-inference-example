@@ -336,6 +336,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
+
     use super::*;
 
     macro_rules! set {
@@ -415,8 +416,8 @@ mod tests {
         let ty_chk = type_infer(ast).expect("Type inference to succeed");
 
         let a = TypeVar(2);
-        let b = TypeVar(8);
-        let c = TypeVar(6);
+        let b = TypeVar(3);
+        let c = TypeVar(4);
         let x_ty = Type::fun(Type::Var(a), Type::fun(Type::Var(b), Type::Var(c)));
         let y_ty = Type::fun(Type::Var(a), Type::Var(b));
         assert_eq!(
@@ -441,7 +442,7 @@ mod tests {
         assert_eq!(
             ty_chk_res,
             Err(TypeError::TypeNotEqual(
-                Type::fun(Type::Int, Type::Var(TypeVar(2))),
+                Type::fun(Type::Int, Type::Var(TypeVar(1))),
                 Type::Int
             ))
         );
